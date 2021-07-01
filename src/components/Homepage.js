@@ -6,6 +6,7 @@ class Homepage extends React.Component{
         return (
         <div>
             <Scraper />
+            Contact Me: kitoshi.charlton@gmail.com
         </div>
         )
     }

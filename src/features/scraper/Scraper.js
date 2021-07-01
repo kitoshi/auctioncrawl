@@ -19,35 +19,45 @@ class Scraper extends React.Component {
 
 
 
-  /*callEbay() {
+  callEbay() {
     fetch(
-      "https://api.sandbox.ebay.com/buy/browse/v1/item_summary/search?q=bluetape" +
-        "&limit=3"
+      `https://api.sandbox.ebay.com/buy/browse/v1/item_summary/search?q=bluetape&limit=3`,
+      {
+          headers:
+          {
+            'Authorization': 'Bearer ' + process.env.REACT_APP_OAUTH_token,
+            'Content-Type': 'application/json',
+            'X-EBAY-C-MARKETPLACE-ID': 'EBAY_US',
+            //'X-EBAY-C-ENDUSERCTX': 'contextualLocation=country=<2_character_country_code>,zip=<zip_code>,affiliateCampaignId=<ePNCampaignId>,affiliateReferenceId=<referenceId></referenceId>',
+          }
+      }
+    
+        
     )
       .then((response) => response.text())
       .then((response) => this.setState({ totalEbayData: response }))
       .catch((err) => err);
-  }*/
-  //need ebay credentials to call api
+  }
+ 
 
   componentDidMount() {
     this.callAPI();
-   // this.callEbay();
+    this.callEbay();
   }
 
   render() {
     const newArr = [...this.state.apiResponse];
     console.log(newArr);
     const renderTable = newArr.map((item) => (
-        <tr>
-        <th key={item.link}>{item.title}</th>
+        <tr key={item.link}>
+        <th>{item.title}</th>
         <th>{item.price}</th>
         <th><a href={item.link}> Link</a></th>
         </tr>
     ))
     const ebayArr = [];
     for (const item in newArr) {
-      ebayArr.push(newArr[item].title);
+      this.state.itemList.push(newArr[item].title);
     }
     console.log(ebayArr);
 
@@ -56,12 +66,14 @@ class Scraper extends React.Component {
         <h1>Current Active Items:</h1>
         <ul></ul>
         <table>
+          <tbody>
             <tr>
                 <th>Item Name</th>
                 <th>Price</th>
                 <th>Link</th>
             </tr>
             {renderTable}
+            </tbody>
         </table>
       </div>
     );
