@@ -5,40 +5,45 @@ class Scraper extends React.Component {
     super(props);
     this.state = {
       apiResponse: "",
+      apiList: [],
       itemList: [],
-      totalEbayData: [],
+      ebayResponse: "",
+      ebayList: [],
     };
   }
 
   callAPI() {
     fetch("http://localhost:9000/crawlerAPI")
       .then((res) => res.text())
-      .then((res) => this.setState({ apiResponse: JSON.parse(res) }))
+      .then((res) => {
+        this.setState({ apiResponse: JSON.parse(res) })
+        this.setState({
+          apiList: [...this.state.apiResponse],
+        })
+        const newArr = []
+        for (const item of this.state.apiList) {
+          newArr.push(item.title);
+          }
+        this.setState({
+          itemList: newArr,
+          })
+      })
       .catch((err) => err);
   }
 
 
 
   callEbay() {
-    fetch(
-      `https://api.sandbox.ebay.com/buy/browse/v1/item_summary/search?q=bluetape&limit=3`,
-      {
-          headers:
-          {
-            'Authorization': 'Bearer ' + process.env.REACT_APP_OAUTH_token,
-            'Content-Type': 'application/json',
-            'X-EBAY-C-MARKETPLACE-ID': 'EBAY_US',
-            //'X-EBAY-C-ENDUSERCTX': 'contextualLocation=country=<2_character_country_code>,zip=<zip_code>,affiliateCampaignId=<ePNCampaignId>,affiliateReferenceId=<referenceId></referenceId>',
-          }
-      }
-    
-        
-    )
-      .then((response) => response.text())
-      .then((response) => this.setState({ totalEbayData: response }))
+    fetch("http://localhost:9000/ebayAPI")
+      .then((res) => res.text())
+      .then((res) => {
+      this.setState({ ebayResponse: JSON.parse(res) })
+      this.setState({
+        ebayList: [...this.state.ebayResponse],
+      })
+      })
       .catch((err) => err);
-  }
- 
+}
 
   componentDidMount() {
     this.callAPI();
@@ -46,20 +51,19 @@ class Scraper extends React.Component {
   }
 
   render() {
-    const newArr = [...this.state.apiResponse];
-    console.log(newArr);
-    const renderTable = newArr.map((item) => (
+    const renderTable = this.state.apiList.map((item) => (
         <tr key={item.link}>
         <th>{item.title}</th>
         <th>{item.price}</th>
         <th><a href={item.link}> Link</a></th>
         </tr>
     ))
-    const ebayArr = [];
-    for (const item in newArr) {
-      this.state.itemList.push(newArr[item].title);
-    }
-    console.log(ebayArr);
+  /*  const renderEbay = this.state.totalEbayData.map((item) => (
+      <tr key={item.itemSummaries.price.value}>
+      <th>{item.itemSummaries.price.value}</th>
+      <th><a href={item.itemSummaries.itemHref}> Link</a></th>
+      </tr>{renderEbay}
+  ))*/
 
     return (
       <div>
@@ -69,10 +73,14 @@ class Scraper extends React.Component {
           <tbody>
             <tr>
                 <th>Item Name</th>
-                <th>Price</th>
+                <th>Auction Price</th>
                 <th>Link</th>
+                <th>Ebay Price</th>
+                <th>Ebay Link</th>
+                <th>Diff</th>
             </tr>
             {renderTable}
+            
             </tbody>
         </table>
       </div>
