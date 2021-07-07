@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 class Scraper extends React.Component {
   constructor(props) {
     super(props);
@@ -9,6 +10,8 @@ class Scraper extends React.Component {
       itemList: [],
       ebayResponse: "",
       ebayList: [],
+      ebayPrice: [],
+      ebayLink: [],
     };
   }
 
@@ -41,6 +44,17 @@ class Scraper extends React.Component {
       this.setState({
         ebayList: [...this.state.ebayResponse],
       })
+      const ebayArr = []
+      for (let i = 0; i < this.state.ebayResponse.length; i++) {
+        if (this.state.ebayResponse[i].findItemsByKeywordsResponse[0].searchResult[0].item === undefined) {
+          ebayArr.push('N/A')
+        } else {
+        ebayArr.push(this.state.ebayResponse[i].findItemsByKeywordsResponse[0].searchResult[0].item[0].sellingStatus[0].currentPrice[0].__value__)
+        }
+      }
+      this.setState({
+        ebayPrice: ebayArr
+      })
       })
       .catch((err) => err);
 }
@@ -51,19 +65,18 @@ class Scraper extends React.Component {
   }
 
   render() {
-    const renderTable = this.state.apiList.map((item) => (
+    const renderAPI = this.state.apiList.map((item) => (
         <tr key={item.link}>
         <th>{item.title}</th>
         <th>{item.price}</th>
         <th><a href={item.link}> Link</a></th>
         </tr>
     ))
-  /*  const renderEbay = this.state.totalEbayData.map((item) => (
-      <tr key={item.itemSummaries.price.value}>
-      <th>{item.itemSummaries.price.value}</th>
-      <th><a href={item.itemSummaries.itemHref}> Link</a></th>
-      </tr>{renderEbay}
-  ))*/
+    const renderEbay = this.state.ebayPrice.map((item) => (
+      <tr key={item.index}>
+      <th>{item}</th>
+      </tr>
+  ))
 
     return (
       <div>
@@ -72,15 +85,22 @@ class Scraper extends React.Component {
         <table>
           <tbody>
             <tr>
-                <th>Item Name</th>
+            <th>Item Name</th>
                 <th>Auction Price</th>
                 <th>Link</th>
+            </tr>
+            {renderAPI}
+            </tbody>
+        </table>
+        <table>
+          <tbody>
+            <tr>
                 <th>Ebay Price</th>
                 <th>Ebay Link</th>
                 <th>Diff</th>
             </tr>
-            {renderTable}
-            
+            {renderEbay}
+
             </tbody>
         </table>
       </div>
