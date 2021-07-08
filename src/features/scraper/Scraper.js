@@ -12,6 +12,7 @@ class Scraper extends React.Component {
       ebayList: [],
       ebayPrice: [],
       ebayLink: [],
+      fullTable: [],
     };
   }
 
@@ -45,6 +46,7 @@ class Scraper extends React.Component {
         ebayList: [...this.state.ebayResponse],
       })
       const ebayArr = []
+      const ebayURL = []
       for (let i = 0; i < this.state.ebayResponse.length; i++) {
         if (this.state.ebayResponse[i].findItemsByKeywordsResponse[0].searchResult[0].item === undefined) {
           ebayArr.push('N/A')
@@ -52,20 +54,33 @@ class Scraper extends React.Component {
         ebayArr.push(this.state.ebayResponse[i].findItemsByKeywordsResponse[0].searchResult[0].item[0].sellingStatus[0].currentPrice[0].__value__)
         }
       }
+      for (let i = 0; i < this.state.ebayResponse.length; i++) {
+        if (this.state.ebayResponse[i].findItemsByKeywordsResponse[0].searchResult[0].item === undefined) {
+          ebayURL.push('N/A')
+        } else {
+          ebayURL.push(this.state.ebayResponse[i].findItemsByKeywordsResponse[0].searchResult[0].item[0].viewItemURL[0])
+        }
+      }
       this.setState({
-        ebayPrice: ebayArr
+        ebayPrice: ebayArr,
+        ebayLink: ebayURL
       })
       })
       .catch((err) => err);
 }
+
+
 
   componentDidMount() {
     this.callAPI();
     this.callEbay();
   }
 
+ 
+
   render() {
-    const renderAPI = this.state.apiList.map((item) => (
+    
+    /*const renderAPI = this.state.apiList.map((item) => (
         <tr key={item.link}>
         <th>{item.title}</th>
         <th>{item.price}</th>
@@ -76,7 +91,18 @@ class Scraper extends React.Component {
       <tr key={item.index}>
       <th>{item}</th>
       </tr>
-  ))
+  ))*/
+  const renderTable = this.state.apiList.map((item, idx)=> {
+    return (
+      <tr key={item.link}>
+            <th>{item.title}</th>
+        <th>{item.price}</th>
+        <th><a href={item.link}> Link</a></th>
+            <td key={idx}>{this.state.ebayPrice[idx]}</td>
+            <td key={this.state.ebayLink}>{this.state.ebayLink[idx]}</td>
+        </tr>
+    )
+  })
 
     return (
       <div>
@@ -88,19 +114,11 @@ class Scraper extends React.Component {
             <th>Item Name</th>
                 <th>Auction Price</th>
                 <th>Link</th>
-            </tr>
-            {renderAPI}
-            </tbody>
-        </table>
-        <table>
-          <tbody>
-            <tr>
                 <th>Ebay Price</th>
                 <th>Ebay Link</th>
                 <th>Diff</th>
             </tr>
-            {renderEbay}
-
+            {renderTable}
             </tbody>
         </table>
       </div>
