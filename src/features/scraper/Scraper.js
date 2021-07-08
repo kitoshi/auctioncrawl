@@ -99,7 +99,7 @@ class Scraper extends React.Component {
         <th>{item.price}</th>
         <th><a href={item.link}> Link</a></th>
             <td key={idx}>{this.state.ebayPrice[idx]}</td>
-            <td key={this.state.ebayLink}>{this.state.ebayLink[idx]}</td>
+            <td key={this.state.ebayLink}><a href={this.state.ebayLink[idx]}> Link</a></td>
         </tr>
     )
   })
