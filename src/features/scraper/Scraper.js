@@ -84,7 +84,7 @@ function Scraper() {
     if (ebayPrice[j] === 'N/A') {
       priceArr.push('N/A')
     } else {
-      priceArr.push(parseFloat(apiList[j].price.match(/[^$][^,]/gi)) - ebayPrice[j])
+      priceArr.push(parseFloat(apiList[j].price.replace(/[$ ,]/g, "")) - ebayPrice[j])
     };
     setpricediffList([...priceArr])
   }
