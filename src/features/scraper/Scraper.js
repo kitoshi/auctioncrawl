@@ -93,32 +93,46 @@ function Scraper() {
 }, [apiList, ebayPrice]);
 
   return (
-    <div>
+    <div >
       <h1>Current Active Items:</h1>
       <ul></ul>
-      <table>
+      <table style={{
+      height: '100%', width: '100%', backgroundColor: 'skyblue'
+    }}>
         <tbody>
           <tr>
-            <th>Item Name</th>
-            <th>Auction Price</th>
-            <th>Link</th>
-            <th>Ebay Price</th>
-            <th>Ebay Link</th>
-            <th>Diff</th>
+            <th style={{
+      height: '25%', width: '15%', backgroundColor: 'skyblue'
+    }}>Item Name</th>
+            <th style={{
+      height: '15%', width: '15%', backgroundColor: 'skyblue'
+    }}>Auction Price</th>
+            <th style={{
+      height: '10%', width: '15%', backgroundColor: 'skyblue'
+    }}>Link</th>
+            <th style={{
+      height: '15%', width: '15%', backgroundColor: 'skyblue'
+    }}>Ebay Price</th>
+            <th style={{
+      height: '10%', width: '15%', backgroundColor: 'skyblue'
+    }}>Ebay Link</th>
+            <th style={{
+      height: '15%', width: '15%', backgroundColor: 'skyblue'
+    }}>Diff</th>
           </tr>
           {apiList.map((item, idx) => {
             return (
-              <tr key={item.link}>
-                <td>{item.title}</td>
-                <td>{item.price}</td>
+              <tr key={idx + 'c'}>
+                <td key={idx + 'v'}>{item.title}</td>
+                <td key={idx + 'b'}>{item.price}</td>
                 <td>
-                  <a href={item.link}> Link</a>
+                  <a href={item.link} key={item.link}> Link</a>
                 </td>
-                <td key={idx}>{ebayPrice[idx]}</td>
+                <td key={idx + 'm'}>{ebayPrice[idx]}</td>
                 <td key={ebayLink}>
                   <a href={ebayLink[idx]}> Link</a>
                 </td>
-                <td>
+                <td key={idx + 'n'}>
                   {pricediffList[idx]}
                 </td>
               </tr>
