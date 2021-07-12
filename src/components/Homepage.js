@@ -1,11 +1,24 @@
 import React from 'react'
-import Scraper from '../features/scraper/Scraper'
+import Table from '../features/scraper/Table.jsx'
+import TableContent from "../features/scraper/TableContent.jsx";
+
+const tableHeaders = [
+    'Item Name',
+    'Auction Price',
+    'Link',
+    'Ebay Price',
+    'Ebay Link',
+    'Diff'
+  ];
 
 class Homepage extends React.Component{
     render() {
         return (
         <div>
-            <Scraper />
+            <Table 
+            headers={tableHeaders}
+            minCellWidth={120}
+            tableContent={<TableContent />}/>
             Contact Me: kitoshi.charlton@gmail.com
         </div>
         )

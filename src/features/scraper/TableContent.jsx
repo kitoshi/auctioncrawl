@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import { React, useState, useEffect} from "react";
 
-function Scraper() {
+function TableContent() {
   const [apiResponse, setapiResponse] = useState([]);
   const [apiList, setapiList] = useState([]);
   const [ebayResponse, setebayResponse] = useState([]);
   const [ebayPrice, setebayPrice] = useState([]);
   const [ebayLink, setebayLink] = useState([]);
-  const [pricediffList, setpricediffList] = useState([])
+  const [pricediffList, setpricediffList] = useState([]);
+
   useEffect(() => {
     const callAPI = () => {
       fetch("http://localhost:9000/crawlerAPI")
@@ -63,7 +64,7 @@ function Scraper() {
               .item[0].viewItemURL[0]
           );
         }
-        
+
         setebayLink([...ebayURL]);
       }
     };
@@ -78,71 +79,45 @@ function Scraper() {
   }, [apiResponse]);
 
   useEffect(() => {
- const tableMath = () => {
-  const priceArr = []
-  for (let j = 0; j < ebayPrice.length; j++) {
-    if (ebayPrice[j] === 'N/A') {
-      priceArr.push('N/A')
-    } else {
-      priceArr.push(parseFloat(apiList[j].price.replace(/[$ ,]/g, "")) - ebayPrice[j])
+    const tableMath = () => {
+      const priceArr = [];
+      for (let j = 0; j < ebayPrice.length; j++) {
+        if (ebayPrice[j] === "N/A") {
+          priceArr.push("N/A");
+        } else {
+          priceArr.push(
+            parseFloat(apiList[j].price.replace(/[$ ,]/g, "")) - ebayPrice[j]
+          );
+        }
+        setpricediffList([...priceArr]);
+      }
     };
-    setpricediffList([...priceArr])
-  }
-}
- tableMath();
-}, [apiList, ebayPrice]);
+    tableMath();
+  }, [apiList, ebayPrice]);
 
   return (
-    <div >
-      <h1>Current Active Items:</h1>
-      <ul></ul>
-      <table style={{
-      height: '100%', width: '100%', backgroundColor: 'skyblue'
-    }}>
-        <tbody>
-          <tr>
-            <th style={{
-      height: '25%', width: '15%', backgroundColor: 'skyblue'
-    }}>Item Name</th>
-            <th style={{
-      height: '15%', width: '15%', backgroundColor: 'skyblue'
-    }}>Auction Price</th>
-            <th style={{
-      height: '10%', width: '15%', backgroundColor: 'skyblue'
-    }}>Link</th>
-            <th style={{
-      height: '15%', width: '15%', backgroundColor: 'skyblue'
-    }}>Ebay Price</th>
-            <th style={{
-      height: '10%', width: '15%', backgroundColor: 'skyblue'
-    }}>Ebay Link</th>
-            <th style={{
-      height: '15%', width: '15%', backgroundColor: 'skyblue'
-    }}>Diff</th>
+    <tbody>
+      {apiList.map((item, idx) => {
+        return (
+          <tr key={idx + "c"}>
+            <td key={idx + "v"}>{item.title}</td>
+            <td key={idx + "b"}>{item.price}</td>
+            <td>
+              <a href={item.link} key={item.link}>
+                {" "}
+                Link
+              </a>
+            </td>
+            <td key={idx + "m"}>{ebayPrice[idx]}</td>
+            <td key={ebayLink}>
+              <a href={ebayLink[idx]}> Link</a>
+            </td>
+            <td key={idx + "n"}>{pricediffList[idx]}</td>
           </tr>
-          {apiList.map((item, idx) => {
-            return (
-              <tr key={idx + 'c'}>
-                <td key={idx + 'v'}>{item.title}</td>
-                <td key={idx + 'b'}>{item.price}</td>
-                <td>
-                  <a href={item.link} key={item.link}> Link</a>
-                </td>
-                <td key={idx + 'm'}>{ebayPrice[idx]}</td>
-                <td key={ebayLink}>
-                  <a href={ebayLink[idx]}> Link</a>
-                </td>
-                <td key={idx + 'n'}>
-                  {pricediffList[idx]}
-                </td>
-              </tr>
-            );
-          })}
-
-        </tbody>
-      </table>
-    </div>
+        );
+      })}
+    </tbody>
   );
 }
 
-export default Scraper;
+export default TableContent;
