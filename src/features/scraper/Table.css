@@ -31,12 +31,12 @@ body {
     display: grid;
     overflow: auto;
     grid-template-columns:
-      minmax(150px, 3fr)
-      minmax(150px, 1fr)
-      minmax(150px, 1fr)
-      minmax(150px, 1fr)
-      minmax(150px, 1fr)
-      minmax(150px, 1fr);
+      minmax(30%, 3fr)
+      minmax(15%, 1fr)
+      minmax(15%, 1fr)
+      minmax(15%, 1fr)
+      minmax(15%, 1fr)
+      minmax(10%, 1fr);
   }
   
   table thead,
