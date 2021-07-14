@@ -64,7 +64,6 @@ function TableContent() {
               .item[0].viewItemURL[0]
           );
         }
-
         setebayLink([...ebayURL]);
       }
     };
@@ -78,15 +77,17 @@ function TableContent() {
     handleApiChange();
   }, [apiResponse]);
 
-  useEffect(() => {
+ useEffect(() => {
     const tableMath = () => {
       const priceArr = [];
       for (let j = 0; j < ebayPrice.length; j++) {
         if (ebayPrice[j] === "N/A") {
           priceArr.push("N/A");
+        } else if (apiList[j].price === undefined){
+          priceArr.push("error");
         } else {
           priceArr.push(
-            parseFloat(apiList[j].price.replace(/[$ ,]/g, "")) - ebayPrice[j]
+            ebayPrice[j] - parseFloat(apiList[j].price.replace(/[$ ,]/g, ""))
           );
         }
         setpricediffList([...priceArr]);
@@ -97,13 +98,13 @@ function TableContent() {
 
   return (
     <tbody>
-      {apiList.map((item, idx) => {
+      {apiList.map((item, idx) => {//the problem is here
         return (
           <tr key={idx + "c"}>
-            <td key={idx + "v"}>{item.title}</td>
-            <td key={idx + "b"}>{item.price}</td>
+            <td key={idx + "v"}>{apiList[74].title}</td>
+            <td key={idx + "b"}>{apiList[74].price}</td>
             <td>
-              <a href={item.link} key={item.link}>
+              <a href={apiList[idx].link} key={apiList[idx].link}>
                 {" "}
                 Link
               </a>

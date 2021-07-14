@@ -33,10 +33,10 @@ body {
     grid-template-columns:
       minmax(30%, 3fr)
       minmax(15%, 1fr)
+      minmax(10%, 1fr)
       minmax(15%, 1fr)
-      minmax(15%, 1fr)
-      minmax(15%, 1fr)
-      minmax(10%, 1fr);
+      minmax(10%, 1fr)
+      minmax(15%, 1fr);
   }
   
   table thead,
