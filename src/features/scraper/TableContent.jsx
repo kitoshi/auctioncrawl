@@ -35,7 +35,6 @@ function TableContent() {
   useEffect(() => {
     const setEbay = () => {
       const ebayArr = [];
-      const ebayURL = [];
       for (let i = 0; i < ebayResponse.length; i++) {
         if (
           ebayResponse[i].findItemsByKeywordsResponse[0].searchResult[0]
@@ -52,6 +51,13 @@ function TableContent() {
         }
         setebayPrice([...ebayArr]);
       }
+    };
+    setEbay();
+  }, [ebayResponse]);
+
+  useEffect(() => {
+    const setLink = () => {
+      const ebayURL = [];
       for (let v = 0; v < ebayResponse.length; v++) {
         if (
           ebayResponse[v].findItemsByKeywordsResponse[0].searchResult[0]
@@ -67,7 +73,7 @@ function TableContent() {
         setebayLink([...ebayURL]);
       }
     };
-    setEbay();
+    setLink();
   }, [ebayResponse]);
 
   useEffect(() => {
@@ -76,7 +82,7 @@ function TableContent() {
     };
     handleApiChange();
   }, [apiResponse]);
-
+  
  useEffect(() => {
     const tableMath = () => {
       const priceArr = [];
@@ -98,11 +104,11 @@ function TableContent() {
 
   return (
     <tbody>
-      {apiList.map((item, idx) => {//the problem is here
+      {apiList.map((item, idx) => {
         return (
-          <tr key={idx + "c"}>
-            <td key={idx + "v"}>{apiList[74].title}</td>
-            <td key={idx + "b"}>{apiList[74].price}</td>
+          <tr>
+            <td key={apiList[idx].title}>{apiList[idx].title}</td>
+            <td key={apiList[idx].price}>{apiList[idx].price}</td>
             <td>
               <a href={apiList[idx].link} key={apiList[idx].link}>
                 {" "}
