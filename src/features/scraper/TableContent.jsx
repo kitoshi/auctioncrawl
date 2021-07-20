@@ -10,7 +10,7 @@ function TableContent() {
 
   useEffect(() => {
     const callAPI = () => {
-      fetch("http://localhost:9000/crawlerAPI")
+      fetch("https://backend-dot-operating-ally-304222.uc.r.appspot.com/crawlerAPI")
         .then((res) => res.text())
         .then((res) => {
           setapiResponse(JSON.parse(res));
@@ -19,7 +19,7 @@ function TableContent() {
     };
 
     const callEbay = () => {
-      fetch("http://localhost:9000/ebayAPI")
+      fetch("https://backend-dot-operating-ally-304222.uc.r.appspot.com/ebayAPI")
         .then((res) => res.text())
         .then((res) => {
           setebayResponse(JSON.parse(res));
@@ -93,7 +93,7 @@ function TableContent() {
           priceArr.push("error");
         } else {
           priceArr.push(
-            ebayPrice[j] - parseFloat(apiList[j].price.replace(/[$ ,]/g, ""))
+           Math.round(ebayPrice[j] - parseFloat(apiList[j].price.replace(/[$ ,]/g, "")))
           );
         }
         setpricediffList([...priceArr]);
@@ -106,20 +106,20 @@ function TableContent() {
     <tbody>
       {apiList.map((item, idx) => {
         return (
-          <tr>
-            <td key={apiList[idx].title}>{apiList[idx].title}</td>
-            <td key={apiList[idx].price}>{apiList[idx].price}</td>
+          <tr key={[idx] + "r"}>
+            <td key={[idx] + "t"}>{apiList[idx].title}</td>
+            <td key={[idx] + "p"}>{apiList[idx].price}</td>
             <td>
               <a href={apiList[idx].link} key={apiList[idx].link}>
                 {" "}
                 Link
               </a>
             </td>
-            <td key={idx + "m"}>{ebayPrice[idx]}</td>
+            <td key={idx + "ep"}>${ebayPrice[idx]}</td>
             <td key={ebayLink}>
               <a href={ebayLink[idx]}> Link</a>
             </td>
-            <td key={idx + "n"}>{pricediffList[idx]}</td>
+            <td key={idx + "pd"} style={{color: pricediffList[idx] < 0 || pricediffList[idx] === 'N/A' ? 'red':'green'}}>${pricediffList[idx]}</td>
           </tr>
         );
       })}
