@@ -5,9 +5,7 @@ import TableContent from "../features/scraper/TableContent.jsx";
 const tableHeaders = [
     'Item Name',
     'Auction Price',
-    'Link',
     'Ebay Price',
-    'Ebay Link',
     'Diff'
   ];
 

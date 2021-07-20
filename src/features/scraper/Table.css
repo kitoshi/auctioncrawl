@@ -32,11 +32,9 @@ body {
     overflow: auto;
     grid-template-columns:
       minmax(30%, 3fr)
-      minmax(15%, 1fr)
-      minmax(10%, 1fr)
-      minmax(15%, 1fr)
-      minmax(10%, 1fr)
-      minmax(15%, 1fr);
+      minmax(20%, 1fr)
+      minmax(20%, 1fr)
+      minmax(30%, 1fr);
   }
   
   table thead,

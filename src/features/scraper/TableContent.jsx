@@ -1,4 +1,4 @@
-import { React, useState, useEffect} from "react";
+import { React, useState, useEffect } from "react";
 
 function TableContent() {
   const [apiResponse, setapiResponse] = useState([]);
@@ -10,7 +10,9 @@ function TableContent() {
 
   useEffect(() => {
     const callAPI = () => {
-      fetch("https://backend-dot-operating-ally-304222.uc.r.appspot.com/crawlerAPI")
+      fetch(
+        "https://backend-dot-operating-ally-304222.uc.r.appspot.com/crawlerAPI"
+      )
         .then((res) => res.text())
         .then((res) => {
           setapiResponse(JSON.parse(res));
@@ -19,7 +21,9 @@ function TableContent() {
     };
 
     const callEbay = () => {
-      fetch("https://backend-dot-operating-ally-304222.uc.r.appspot.com/ebayAPI")
+      fetch(
+        "https://backend-dot-operating-ally-304222.uc.r.appspot.com/ebayAPI"
+      )
         .then((res) => res.text())
         .then((res) => {
           setebayResponse(JSON.parse(res));
@@ -82,18 +86,20 @@ function TableContent() {
     };
     handleApiChange();
   }, [apiResponse]);
-  
- useEffect(() => {
+
+  useEffect(() => {
     const tableMath = () => {
       const priceArr = [];
       for (let j = 0; j < ebayPrice.length; j++) {
         if (ebayPrice[j] === "N/A") {
           priceArr.push("N/A");
-        } else if (apiList[j].price === undefined){
+        } else if (apiList[j].price === undefined) {
           priceArr.push("error");
         } else {
           priceArr.push(
-           Math.round(ebayPrice[j] - parseFloat(apiList[j].price.replace(/[$ ,]/g, "")))
+            Math.round(
+              ebayPrice[j] - parseFloat(apiList[j].price.replace(/[$ ,]/g, ""))
+            )
           );
         }
         setpricediffList([...priceArr]);
@@ -108,18 +114,33 @@ function TableContent() {
         return (
           <tr key={[idx] + "r"}>
             <td key={[idx] + "t"}>{apiList[idx].title}</td>
-            <td key={[idx] + "p"}>{apiList[idx].price}</td>
-            <td>
-              <a href={apiList[idx].link} key={apiList[idx].link}>
-                {" "}
-                Link
+            <td key={apiList[idx].link}>
+              <a
+                href={apiList[idx].link}
+                style={{ color: "inherit", textDecoration: "inherit" }}
+              >
+                {apiList[idx].price}
               </a>
             </td>
-            <td key={idx + "ep"}>${ebayPrice[idx]}</td>
             <td key={ebayLink}>
-              <a href={ebayLink[idx]}> Link</a>
+              <a
+                href={ebayLink[idx]}
+                style={{ color: "inherit", textDecoration: "inherit" }}
+              >
+                ${ebayPrice[idx]}
+              </a>
             </td>
-            <td key={idx + "pd"} style={{color: pricediffList[idx] < 0 || pricediffList[idx] === 'N/A' ? 'red':'green'}}>${pricediffList[idx]}</td>
+            <td
+              key={idx + "pd"}
+              style={{
+                color:
+                  pricediffList[idx] < 0 || pricediffList[idx] === "N/A"
+                    ? "red"
+                    : "green",
+              }}
+            >
+              ${pricediffList[idx]}
+            </td>
           </tr>
         );
       })}
