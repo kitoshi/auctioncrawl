@@ -18,7 +18,7 @@ class Homepage extends React.Component{
             minCellWidth={120}
             tableContent={<TableContent />}/>
             <br></br>
-            <h2 style={{textAlign: "center"}}>Contact Me: kitoshi.charlton@gmail.com</h2>
+            <h2 style={{textAlign: "center"}}>Contact Me: admin@tradingfever.com</h2>
         </div>
         )
     }
