@@ -19,7 +19,8 @@ class Homepage extends React.Component{
             headers={tableHeaders}
             minCellWidth={120}
             tableContent={<TableContent />}/>
-            Contact Me: kitoshi.charlton@gmail.com
+            <br></br>
+            <h2 style={{textAlign: "center"}}>Contact Me: kitoshi.charlton@gmail.com</h2>
         </div>
         )
     }

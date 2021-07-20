@@ -72,7 +72,7 @@ const resetTableCells = () => {
   return (
     <div className="container">
     <div className="table-wrapper">
-      <h1>Current Active Items:</h1>
+      <h1 style={{textAlign: "center"}} >Current Active Items:</h1>
       <ul></ul>
       <table className="resizeable-table" ref={tableElement}>
         <thead>
@@ -94,7 +94,7 @@ const resetTableCells = () => {
          {tableContent}
       </table>
     </div>
-    <button onClick={resetTableCells}>Reset</button>
+    <button onClick={resetTableCells}  style={{float: 'right'}}>Reset</button>
     </div>
   );
 }
