@@ -72,7 +72,7 @@ const resetTableCells = () => {
   return (
     <div className="container">
     <div className="table-wrapper">
-      <h1 style={{textAlign: "center"}} >Current Active Items:</h1>
+      <h1 style={{textAlign: "center"}} >Current Active Items(Prices are Links!):</h1>
       <ul></ul>
       <table className="resizeable-table" ref={tableElement}>
         <thead>
