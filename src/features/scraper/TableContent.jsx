@@ -10,9 +10,7 @@ function TableContent() {
 
   useEffect(() => {
     const callAPI = () => {
-      fetch(
-        "https://backend-dot-operating-ally-304222.uc.r.appspot.com/crawlerAPI"
-      )
+      fetch(process.env.REACT_APP_BACKEND_URL1)
         .then((res) => res.text())
         .then((res) => {
           setapiResponse(JSON.parse(res));
@@ -21,9 +19,7 @@ function TableContent() {
     };
 
     const callEbay = () => {
-      fetch(
-        "https://backend-dot-operating-ally-304222.uc.r.appspot.com/ebayAPI"
-      )
+      fetch(process.env.REACT_APP_BACKEND_URL2)
         .then((res) => res.text())
         .then((res) => {
           setebayResponse(JSON.parse(res));
