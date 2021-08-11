@@ -149,7 +149,8 @@ Project Link: [https://github.com/kitoshi/auctioncrawl](https://github.com/kitos
 ## Acknowledgements
 
 - [Brian Haley, framework planning and mentoring](https://github.com/brian-e-haley)
-- [Ryan Finni, resizable table tutorial](https://letsbuildui.dev/articles/resizable-tables-with-react-and-css-grid)
+- [R. Finni, resizable table tutorial](https://letsbuildui.dev/articles/resizable-tables-with-react-and-css-grid)
+- [O. Drew, readme template](https://github.com/othneildrew/Best-README-Template)
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
