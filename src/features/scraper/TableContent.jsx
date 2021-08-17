@@ -1,4 +1,5 @@
 import { React, useState, useEffect } from "react";
+import Loader from "./Loader.js";
 
 function TableContent() {
   const [apiResponse, setapiResponse] = useState([]);
@@ -7,8 +8,10 @@ function TableContent() {
   const [ebayPrice, setebayPrice] = useState([]);
   const [ebayLink, setebayLink] = useState([]);
   const [pricediffList, setpricediffList] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
     const callAPI = () => {
       fetch(process.env.REACT_APP_BACKEND_URL1)
         .then((res) => res.text())
@@ -71,6 +74,7 @@ function TableContent() {
           );
         }
         setebayLink([...ebayURL]);
+        setIsLoading(false);
       }
     };
     setLink();
@@ -106,6 +110,7 @@ function TableContent() {
 
   return (
     <tbody>
+      {isLoading ? <Loader /> : null}
       {apiList.map((item, idx) => {
         return (
           <tr key={[idx] + "r"}>
