@@ -2,11 +2,9 @@ import React from "react";
 import Table from "../features/scraper/Table.jsx";
 import TableContent from "../features/scraper/TableContent.jsx";
 
-
-
 const tableHeaders = ["Item Name", "Auction Price", "Ebay Price", "Diff"];
 
-function Homepage(props) {
+function Content(props) {
   return (
     <div>
       <Table
@@ -22,4 +20,4 @@ function Homepage(props) {
   );
 }
 
-export default Homepage;
+export default Content;

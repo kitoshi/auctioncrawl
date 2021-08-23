@@ -1,15 +1,6 @@
-body {
-  background: linear-gradient(90deg, #b1ef8f 0%, #517ea5 100%) repeat-y;
-  font-family: Helvetica, Arial, sans-serif;
-}
-
-* {
-  box-sizing: border-box;
-}
-
 /* Reset formatting */
 button {
-  background: #517ea5;
+  background: #174268;
   border: none;
   color: #fff;
   font-size: 24px;
@@ -43,6 +34,10 @@ table tr {
   display: contents;
 }
 
+table tr td {
+  border-top: 1px solid #ccc;
+}
+
 table th {
   position: relative;
   font-size: 18px;
@@ -61,10 +56,6 @@ table td span {
   text-overflow: ellipsis;
   overflow: hidden;
   display: block;
-}
-
-table tr td {
-  border-top: 1px solid #ccc;
 }
 
 .resize-handle {

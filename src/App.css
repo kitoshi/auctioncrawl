@@ -1,0 +1,131 @@
+@import url("https://fonts.googleapis.com/css?family=Lato&display=swap");
+
+html {
+  font-size: 100%;
+  box-sizing: border-box;
+  font-family: "lato", Arial, Helvetica, sans-serif;
+}
+
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  margin: 0px;
+  padding: 0px;
+  min-height: 100vh;
+  text-align: center;
+  background-color: #f4f6f4;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@keyframes animate {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+    border-radius: 0;
+  }
+  100% {
+    transform: translateY(-1000px) rotate(720deg);
+    opacity: 0;
+    border-radius: 50%;
+  }
+}
+
+div.content {
+  animation: slideIn 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translate3d(-20rem, 0, 500rem);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+ul.navBorder {
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
+  display: inline-block;
+  width: 100%;
+}
+
+ul.light-theme {
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
+  border: 3px solid #000000;
+  display: inline-block;
+  width: 100%;
+}
+
+li {
+  color: #000000;
+}
+
+body.light-theme li {
+  color: #000000;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+a {
+  color: #292828;
+  border-radius: 10%;
+}
+
+a.navitem {
+  color: rgb(0, 0, 0);
+  text-transform: uppercase;
+  text-decoration: none;
+  display: inline-block;
+  padding: 0.5% 0.5%;
+  position: relative;
+}
+
+a.navitem:after {
+  background: none repeat scroll 0 0 transparent;
+  bottom: 0;
+  content: "";
+  display: block;
+  height: 2px;
+  left: 20%;
+  position: relative;
+  background: rgb(0, 0, 0);
+  transition: width 0.3s ease 0s, left 0.3s ease 0s;
+  width: 0;
+}
+
+a.navitem:hover:after {
+  width: 100%;
+  left: 0;
+}
+
+i {
+  color: #000000;
+}
+
+p {
+  color: #000000;
+  text-align: center;
+}
+
+nav {
+  padding: 1%;
+  padding-right: 2%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}

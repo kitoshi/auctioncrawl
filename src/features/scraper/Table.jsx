@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useCallback, useRef } from "react";
 import "./Table.css";
 
-
 const createHeaders = (headers) => {
   return headers.map((item) => ({
     text: item,
@@ -68,14 +67,17 @@ const Table = ({ headers, minCellWidth, tableContent }) => {
     tableElement.current.style.gridTemplateColumns = "";
   };
 
-
-
   return (
-    <div className="container">
+    <div
+      className="container"
+      style={{
+        backgroundColor: "blue",
+        padding: "20px",
+        background: "linear-gradient(90deg, #b1ef8f 0%, #517ea5 100%) repeat-y",
+      }}
+    >
       <div className="table-wrapper">
-        <h1 style={{ textAlign: "center" }}>
-          Current Active Items(Prices are Links!):
-        </h1>
+        <h1 style={{ textAlign: "center" }}>Current Active Items:</h1>
         <ul></ul>
         <table className="resizeable-table" ref={tableElement}>
           <thead>
