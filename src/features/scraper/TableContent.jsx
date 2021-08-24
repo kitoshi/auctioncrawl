@@ -1,39 +1,29 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useCallback } from "react";
 import Loader from "./Loader.js";
 
 function TableContent() {
+  const [ebayResponse, setebayResponse] = useState([]);
   const [apiResponse, setapiResponse] = useState([]);
   const [apiList, setapiList] = useState([]);
-  const [ebayResponse, setebayResponse] = useState([]);
   const [ebayPrice, setebayPrice] = useState([]);
   const [ebayLink, setebayLink] = useState([]);
   const [pricediffList, setpricediffList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
+  const fetchMyAPI = useCallback(async () => {
+    const response = await fetch(process.env.REACT_APP_BACKEND_URL1);
+    const json = await response.json();
+    setapiResponse(json);
+    const response2 = await fetch(process.env.REACT_APP_BACKEND_URL2);
+    const json2 = await response2.json();
+    setebayResponse(json2);
     setIsLoading(true);
-    const callAPI = () => {
-      fetch(process.env.REACT_APP_BACKEND_URL1)
-        .then((res) => res.text())
-        .then((res) => {
-          setapiResponse(JSON.parse(res));
-        })
-        .catch((err) => err);
-    };
-
-    const callEbay = () => {
-      fetch(process.env.REACT_APP_BACKEND_URL2)
-        .then((res) => res.text())
-        .then((res) => {
-          setebayResponse(JSON.parse(res));
-        })
-
-        .catch((err) => err);
-    };
-
-    callAPI();
-    callEbay();
   }, []);
+
+  useEffect(() => {
+    fetchMyAPI();
+  }, [fetchMyAPI]);
+
 
   useEffect(() => {
     const setEbay = () => {
@@ -82,7 +72,9 @@ function TableContent() {
 
   useEffect(() => {
     const handleApiChange = () => {
-      setapiList([...apiResponse]);
+      console.log(Object.values(apiResponse).flat());
+
+      setapiList(Object.values(apiResponse).flat());
     };
     handleApiChange();
   }, [apiResponse]);
@@ -93,12 +85,13 @@ function TableContent() {
       for (let j = 0; j < ebayPrice.length; j++) {
         if (ebayPrice[j] === "N/A") {
           priceArr.push("N/A");
-        } else if (apiList[j].price === undefined) {
+        } else if (apiList[j]["price"] === undefined) {
           priceArr.push("error");
         } else {
           priceArr.push(
             Math.round(
-              ebayPrice[j] - parseFloat(apiList[j].price.replace(/[$ ,]/g, ""))
+              ebayPrice[j] -
+                parseFloat(apiList[j]["price"].replace(/[$ ,]/g, ""))
             )
           );
         }
