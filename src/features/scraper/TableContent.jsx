@@ -11,19 +11,18 @@ function TableContent() {
   const [isLoading, setIsLoading] = useState(false);
 
   const fetchMyAPI = useCallback(async () => {
+    setIsLoading(true);
     const response = await fetch(process.env.REACT_APP_BACKEND_URL1);
     const json = await response.json();
     setapiResponse(json);
     const response2 = await fetch(process.env.REACT_APP_BACKEND_URL2);
     const json2 = await response2.json();
     setebayResponse(json2);
-    setIsLoading(true);
   }, []);
 
   useEffect(() => {
     fetchMyAPI();
   }, [fetchMyAPI]);
-
 
   useEffect(() => {
     const setEbay = () => {
@@ -72,31 +71,38 @@ function TableContent() {
 
   useEffect(() => {
     const handleApiChange = () => {
-      console.log(Object.values(apiResponse).flat());
-
-      setapiList(Object.values(apiResponse).flat());
+      if (apiResponse.length === 2) {
+        setapiList(Object.assign([...apiResponse][0]["combinedList1"], [...apiResponse][1]["combinedList2"]));
+        return console.log("working");
+      } else {
+        console.log("loading");
+        setapiList(apiResponse.flat());
+      }
     };
     handleApiChange();
   }, [apiResponse]);
 
   useEffect(() => {
     const tableMath = () => {
-      const priceArr = [];
-      for (let j = 0; j < ebayPrice.length; j++) {
-        if (ebayPrice[j] === "N/A") {
-          priceArr.push("N/A");
-        } else if (apiList[j]["price"] === undefined) {
-          priceArr.push("error");
-        } else {
-          priceArr.push(
-            Math.round(
-              ebayPrice[j] -
-                parseFloat(apiList[j]["price"].replace(/[$ ,]/g, ""))
-            )
-          );
-        }
-        setpricediffList([...priceArr]);
+      if (apiList.length < 175) {
+        return null
       }
+      const priceArr = [];
+         for (let j = 0; j < ebayPrice.length; j++) {
+           if (ebayPrice[j] === "N/A") {
+             priceArr.push("N/A");
+           } else if (apiList[j]["price"] === undefined) {
+             priceArr.push("error");
+           } else {
+             priceArr.push(
+               Math.round(
+                 ebayPrice[j] -
+                   parseFloat(apiList[j]["price"].replace(/[$ ,]/g, ""))
+               )
+             );
+           }
+           setpricediffList([...priceArr]);
+         }
     };
     tableMath();
   }, [apiList, ebayPrice]);
