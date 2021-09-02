@@ -63,7 +63,6 @@ function TableContent() {
           );
         }
         setebayLink([...ebayURL]);
-        setIsLoading(false);
       }
     };
     setLink();
@@ -72,37 +71,43 @@ function TableContent() {
   useEffect(() => {
     const handleApiChange = () => {
       if (apiResponse.length === 2) {
-        setapiList(Object.assign([...apiResponse][0]["combinedList1"], [...apiResponse][1]["combinedList2"]));
-        return console.log("working");
+        setapiList(
+          [...apiResponse][0]["combinedList1"].concat(
+            [...apiResponse][1]["combinedList2"]
+          )
+        );
+        setIsLoading(false);
       } else {
         console.log("loading");
         setapiList(apiResponse.flat());
       }
     };
+
     handleApiChange();
   }, [apiResponse]);
 
   useEffect(() => {
     const tableMath = () => {
-      if (apiList.length < 175) {
-        return null
-      }
       const priceArr = [];
-         for (let j = 0; j < ebayPrice.length; j++) {
-           if (ebayPrice[j] === "N/A") {
-             priceArr.push("N/A");
-           } else if (apiList[j]["price"] === undefined) {
-             priceArr.push("error");
-           } else {
-             priceArr.push(
-               Math.round(
-                 ebayPrice[j] -
-                   parseFloat(apiList[j]["price"].replace(/[$ ,]/g, ""))
-               )
-             );
-           }
-           setpricediffList([...priceArr]);
-         }
+      if (apiList.length < 175) {
+        return null;
+      } else {
+        for (let j = 0; j < ebayPrice.length; j++) {
+          if (ebayPrice[j] === "N/A") {
+            priceArr.push("N/A");
+          } else if (apiList[j]["price"] === undefined) {
+            priceArr.push("error");
+          } else {
+            priceArr.push(
+              Math.round(
+                ebayPrice[j] -
+                  parseFloat(apiList[j]["price"].replace(/[$ ,]/g, ""))
+              )
+            );
+          }
+        }
+      }
+      setpricediffList([...priceArr]);
     };
     tableMath();
   }, [apiList, ebayPrice]);
