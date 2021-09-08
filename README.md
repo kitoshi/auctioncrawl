@@ -55,7 +55,7 @@
 
 ## About The Project
 
- <a href="https://tradingfever.com">
+ <a href="https://gobidup.com">
  <img src="screenshots/projectscreenshot.png" alt="project screenshot" width="480" height="480"></img>
  </a>
 
@@ -166,4 +166,4 @@ Project Link: [https://github.com/kitoshi/auctioncrawl](https://github.com/kitos
 [license-shield]: https://img.shields.io/github/license/kitoshi/auctioncrawl.svg?style=for-the-badge
 [license-url]: https://github.com/kitoshi/auctioncrawl/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://www.linkedin.com/in/robert-charlton-a791b591/
+[linkedin-url]: https://www.linkedin.com/in/robert-k-charlton/
