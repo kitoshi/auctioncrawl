@@ -1,6 +1,7 @@
 import React from 'react';
 import Content from './components/Content.jsx';
 import Landing from './components/Landing.jsx';
+import Table001 from './features/displaytable/Table001.jsx';
 import './App.css';
 import { BrowserRouter, Route, Link, Routes } from 'react-router-dom';
 //import { getAuth, onAuthStateChanged } from 'firebase/auth';
@@ -24,6 +25,11 @@ function App() {
       <div className='App'>
         <ul className='navBorder'>
           <li>
+            <Link to='/federal' className='navitem' style={{ float: 'right' }}>
+              Table001
+            </Link>
+          </li>
+          <li>
             <Link to='/content' className='navitem' style={{ float: 'right' }}>
               Auctions
             </Link>
@@ -37,6 +43,7 @@ function App() {
         <Routes>
           <Route exact path='/' element={<Landing />} />
           <Route path='/content' element={<Content />} />
+          <Route path='/federal' element={<Table001 />} />
         </Routes>
       </div>
     </BrowserRouter>
