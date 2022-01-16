@@ -1,5 +1,5 @@
-import { React, useState, useEffect, useCallback } from "react";
-import Loader from "./Loader.js";
+import { React, useState, useEffect, useCallback } from 'react';
+import Loader from './Loader.jsx';
 
 function TableContent() {
   const [ebayResponse, setebayResponse] = useState([]);
@@ -32,7 +32,7 @@ function TableContent() {
           ebayResponse[i].findItemsByKeywordsResponse[0].searchResult[0]
             .item === undefined
         ) {
-          ebayArr.push("N/A");
+          ebayArr.push('N/A');
         } else {
           ebayArr.push(
             parseFloat(
@@ -55,7 +55,7 @@ function TableContent() {
           ebayResponse[v].findItemsByKeywordsResponse[0].searchResult[0]
             .item === undefined
         ) {
-          ebayURL.push("N/A");
+          ebayURL.push('N/A');
         } else {
           ebayURL.push(
             ebayResponse[v].findItemsByKeywordsResponse[0].searchResult[0]
@@ -72,13 +72,13 @@ function TableContent() {
     const handleApiChange = () => {
       if (apiResponse.length === 2) {
         setapiList(
-          [...apiResponse][0]["combinedList1"].concat(
-            [...apiResponse][1]["combinedList2"]
+          [...apiResponse][0]['combinedList1'].concat(
+            [...apiResponse][1]['combinedList2']
           )
         );
         setIsLoading(false);
       } else {
-        console.log("loading");
+        console.log('loading');
         setapiList(apiResponse.flat());
       }
     };
@@ -93,15 +93,15 @@ function TableContent() {
         return null;
       } else {
         for (let j = 0; j < ebayPrice.length; j++) {
-          if (ebayPrice[j] === "N/A") {
-            priceArr.push("N/A");
-          } else if (apiList[j]["price"] === undefined) {
-            priceArr.push("error");
+          if (ebayPrice[j] === 'N/A') {
+            priceArr.push('N/A');
+          } else if (apiList[j]['price'] === undefined) {
+            priceArr.push('error');
           } else {
             priceArr.push(
               Math.round(
                 ebayPrice[j] -
-                  parseFloat(apiList[j]["price"].replace(/[$ ,]/g, ""))
+                  parseFloat(apiList[j]['price'].replace(/[$ ,]/g, ''))
               )
             );
           }
@@ -117,12 +117,12 @@ function TableContent() {
       {isLoading ? <Loader /> : null}
       {apiList.map((item, idx) => {
         return (
-          <tr key={[idx] + "r"}>
-            <td key={[idx] + "t"}>{apiList[idx].title}</td>
+          <tr key={[idx] + 'r'}>
+            <td key={[idx] + 't'}>{apiList[idx].title}</td>
             <td key={apiList[idx].link}>
               <a
                 href={apiList[idx].link}
-                style={{ color: "inherit", textDecoration: "inherit" }}
+                style={{ color: 'inherit', textDecoration: 'inherit' }}
               >
                 {apiList[idx].price}
               </a>
@@ -130,18 +130,18 @@ function TableContent() {
             <td key={ebayLink}>
               <a
                 href={ebayLink[idx]}
-                style={{ color: "inherit", textDecoration: "inherit" }}
+                style={{ color: 'inherit', textDecoration: 'inherit' }}
               >
                 ${ebayPrice[idx]}
               </a>
             </td>
             <td
-              key={idx + "pd"}
+              key={idx + 'pd'}
               style={{
                 color:
-                  pricediffList[idx] < 0 || pricediffList[idx] === "N/A"
-                    ? "red"
-                    : "green",
+                  pricediffList[idx] < 0 || pricediffList[idx] === 'N/A'
+                    ? 'red'
+                    : 'green',
               }}
             >
               ${pricediffList[idx]}

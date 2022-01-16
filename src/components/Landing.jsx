@@ -1,38 +1,38 @@
-import React from "react";
+import React from 'react';
 
-function LandingPage(props) {
+function LandingPage() {
   return (
     <div
       style={{
-        justifyContent: "center",
-        paddingLeft: "12%",
-        paddingRight: "12%",
+        justifyContent: 'center',
+        paddingLeft: '12%',
+        paddingRight: '12%',
       }}
     >
-      <h1 style={{ color: "#041D42", textTransform: "uppercase" }}>
+      <h1 style={{ color: '#041D42', textTransform: 'uppercase' }}>
         Auction Arbitrage
       </h1>
       <h2
-        style={{ textDecoration: "underline", textDecorationColor: "#91A3B5" }}
+        style={{ textDecoration: 'underline', textDecorationColor: '#91A3B5' }}
       >
         A tool for business owners to buy and sell online
       </h2>
       <div
         style={{
-          paddingLeft: "12%",
-          paddingRight: "12%",
+          paddingLeft: '12%',
+          paddingRight: '12%',
         }}
       >
         <p
           style={{
-            borderRadius: "6px",
-            paddingLeft: "10px",
-            paddingRight: "10px",
-            paddingTop: "2px",
-            paddingBottom: "2px",
-            boxSizing: "border-box",
-            boxShadow: "0 2px 2px rgba(204, 197, 185, 0.5)",
-            backgroundColor: "white",
+            borderRadius: '6px',
+            paddingLeft: '10px',
+            paddingRight: '10px',
+            paddingTop: '2px',
+            paddingBottom: '2px',
+            boxSizing: 'border-box',
+            boxShadow: '0 2px 2px rgba(204, 197, 185, 0.5)',
+            backgroundColor: 'white',
           }}
         >
           Auction Crawler is a tool for business owners to buy and sell online.
@@ -44,14 +44,14 @@ function LandingPage(props) {
         </p>
         <p
           style={{
-            borderRadius: "6px",
-            paddingLeft: "10px",
-            paddingRight: "10px",
-            paddingTop: "2px",
-            paddingBottom: "2px",
-            boxSizing: "border-box",
-            boxShadow: "0 2px 2px rgba(204, 197, 185, 0.5)",
-            backgroundColor: "white",
+            borderRadius: '6px',
+            paddingLeft: '10px',
+            paddingRight: '10px',
+            paddingTop: '2px',
+            paddingBottom: '2px',
+            boxSizing: 'border-box',
+            boxShadow: '0 2px 2px rgba(204, 197, 185, 0.5)',
+            backgroundColor: 'white',
           }}
         >
           Auction Arbitrage is a web app designed to centralize and automate
@@ -63,14 +63,14 @@ function LandingPage(props) {
         </p>
         <p
           style={{
-            borderRadius: "6px",
-            paddingLeft: "10px",
-            paddingRight: "10px",
-            paddingTop: "2px",
-            paddingBottom: "2px",
-            boxSizing: "border-box",
-            boxShadow: "0 2px 2px rgba(204, 197, 185, 0.5)",
-            backgroundColor: "white",
+            borderRadius: '6px',
+            paddingLeft: '10px',
+            paddingRight: '10px',
+            paddingTop: '2px',
+            paddingBottom: '2px',
+            boxSizing: 'border-box',
+            boxShadow: '0 2px 2px rgba(204, 197, 185, 0.5)',
+            backgroundColor: 'white',
           }}
         >
           Once you find an auction you want to buy, click the price to bid on
