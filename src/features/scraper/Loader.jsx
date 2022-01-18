@@ -1,6 +1,6 @@
-import React from 'react';
-import Spinner from '../../images/loader.svg';
-import './Loader.css';
+import React from 'react'
+import Spinner from '../../images/loader.svg'
+import './Loader.css'
 
 function Loader() {
   return (
@@ -24,7 +24,7 @@ function Loader() {
         ></img>
       </th>
     </tr>
-  );
+  )
 }
 
-export default Loader;
+export default Loader

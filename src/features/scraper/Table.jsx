@@ -1,77 +1,77 @@
-import React, { useEffect, useState, useCallback, useRef } from 'react';
-import PropTypes from 'prop-types';
-import './Table.css';
+import React, { useEffect, useState, useCallback, useRef } from 'react'
+import PropTypes from 'prop-types'
+import './Table.css'
 
 const createHeaders = (headers) => {
   return headers.map((item) => ({
     text: item,
     ref: useRef(),
-  }));
-};
+  }))
+}
 
 const Table = ({ headers, minCellWidth, tableContent }) => {
   Table.propTypes = {
     headers: PropTypes.array,
     minCellWidth: PropTypes.number,
     tableContent: PropTypes.element,
-  };
-  const [tableHeight, setTableHeight] = useState('auto');
-  const [activeIndex, setActiveIndex] = useState(null);
-  const tableElement = useRef(null);
-  const columns = createHeaders(headers);
+  }
+  const [tableHeight, setTableHeight] = useState('auto')
+  const [activeIndex, setActiveIndex] = useState(null)
+  const tableElement = useRef(null)
+  const columns = createHeaders(headers)
 
   useEffect(() => {
-    setTableHeight(tableElement.current.offsetHeight);
-  }, []);
+    setTableHeight(tableElement.current.offsetHeight)
+  }, [])
 
   const mouseDown = (index) => {
-    setActiveIndex(index);
-  };
+    setActiveIndex(index)
+  }
 
   const mouseMove = useCallback(
     (e) => {
       const gridColumns = columns.map((col, i) => {
         if (i === activeIndex) {
-          const width = e.clientX - col.ref.current.offsetLeft;
+          const width = e.clientX - col.ref.current.offsetLeft
 
           if (width >= minCellWidth) {
-            return `${width}px`;
+            return `${width}px`
           }
         }
-        return `${col.ref.current.offsetWidth}px`;
-      });
+        return `${col.ref.current.offsetWidth}px`
+      })
 
       tableElement.current.style.gridTemplateColumns = `${gridColumns.join(
         ' '
-      )}`;
+      )}`
     },
     [activeIndex, columns, minCellWidth]
-  );
+  )
 
   const removeListeners = useCallback(() => {
-    window.removeEventListener('mousemove', mouseMove);
-    window.removeEventListener('mouseup', removeListeners);
-  }, [mouseMove]);
+    window.removeEventListener('mousemove', mouseMove)
+    window.removeEventListener('mouseup', removeListeners)
+  }, [mouseMove])
 
   const mouseUp = useCallback(() => {
-    setActiveIndex(null);
-    removeListeners();
-  }, [setActiveIndex, removeListeners]);
+    setActiveIndex(null)
+    removeListeners()
+  }, [setActiveIndex, removeListeners])
 
   useEffect(() => {
     if (activeIndex !== null) {
-      window.addEventListener('mousemove', mouseMove);
-      window.addEventListener('mouseup', mouseUp);
+      window.addEventListener('mousemove', mouseMove)
+      window.addEventListener('mouseup', mouseUp)
     }
 
     return () => {
-      removeListeners();
-    };
-  }, [activeIndex, mouseMove, mouseUp, removeListeners]);
+      removeListeners()
+    }
+  }, [activeIndex, mouseMove, mouseUp, removeListeners])
 
   const resetTableCells = () => {
-    tableElement.current.style.gridTemplateColumns = '';
-  };
+    tableElement.current.style.gridTemplateColumns = ''
+  }
 
   return (
     <div
@@ -109,7 +109,7 @@ const Table = ({ headers, minCellWidth, tableContent }) => {
         Reset
       </button>
     </div>
-  );
-};
+  )
+}
 
-export default Table;
+export default Table

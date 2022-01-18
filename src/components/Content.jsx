@@ -1,8 +1,8 @@
-import React from 'react';
-import Table from '../features/scraper/Table.jsx';
-import TableContent from '../features/scraper/TableContent.jsx';
+import React from 'react'
+import Table from '../features/scraper/Table.jsx'
+import TableContent from '../features/scraper/TableContent.jsx'
 
-const tableHeaders = ['Item Name', 'Auction Price', 'Ebay Price', 'Diff'];
+const tableHeaders = ['Item Name', 'Auction Price', 'Ebay Price', 'Diff']
 
 function Content() {
   return (
@@ -17,7 +17,7 @@ function Content() {
         Contact Me: admin@tradingfever.com
       </h2>
     </div>
-  );
+  )
 }
 
-export default Content;
+export default Content

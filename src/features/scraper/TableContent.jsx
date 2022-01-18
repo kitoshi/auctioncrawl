@@ -1,72 +1,72 @@
-import { React, useState, useEffect, useCallback } from 'react';
-import Loader from './Loader.jsx';
+import { React, useState, useEffect, useCallback } from 'react'
+import Loader from './Loader.jsx'
 
 function TableContent() {
-  const [ebayResponse, setebayResponse] = useState([]);
-  const [apiResponse, setapiResponse] = useState([]);
-  const [apiList, setapiList] = useState([]);
-  const [ebayPrice, setebayPrice] = useState([]);
-  const [ebayLink, setebayLink] = useState([]);
-  const [pricediffList, setpricediffList] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [ebayResponse, setebayResponse] = useState([])
+  const [apiResponse, setapiResponse] = useState([])
+  const [apiList, setapiList] = useState([])
+  const [ebayPrice, setebayPrice] = useState([])
+  const [ebayLink, setebayLink] = useState([])
+  const [pricediffList, setpricediffList] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
 
   const fetchMyAPI = useCallback(async () => {
-    setIsLoading(true);
-    const response = await fetch(process.env.REACT_APP_BACKEND_URL1);
-    const json = await response.json();
-    setapiResponse(json);
-    const response2 = await fetch(process.env.REACT_APP_BACKEND_URL2);
-    const json2 = await response2.json();
-    setebayResponse(json2);
-  }, []);
+    setIsLoading(true)
+    const response = await fetch(process.env.REACT_APP_BACKEND_URL1)
+    const json = await response.json()
+    setapiResponse(json)
+    const response2 = await fetch(process.env.REACT_APP_BACKEND_URL2)
+    const json2 = await response2.json()
+    setebayResponse(json2)
+  }, [])
 
   useEffect(() => {
-    fetchMyAPI();
-  }, [fetchMyAPI]);
+    fetchMyAPI()
+  }, [fetchMyAPI])
 
   useEffect(() => {
     const setEbay = () => {
-      const ebayArr = [];
+      const ebayArr = []
       for (let i = 0; i < ebayResponse.length; i++) {
         if (
           ebayResponse[i].findItemsByKeywordsResponse[0].searchResult[0]
             .item === undefined
         ) {
-          ebayArr.push('N/A');
+          ebayArr.push('N/A')
         } else {
           ebayArr.push(
             parseFloat(
               ebayResponse[i].findItemsByKeywordsResponse[0].searchResult[0]
                 .item[0].sellingStatus[0].currentPrice[0].__value__
             )
-          );
+          )
         }
-        setebayPrice([...ebayArr]);
+        setebayPrice([...ebayArr])
       }
-    };
-    setEbay();
-  }, [ebayResponse]);
+    }
+    setEbay()
+  }, [ebayResponse])
 
   useEffect(() => {
     const setLink = () => {
-      const ebayURL = [];
+      const ebayURL = []
       for (let v = 0; v < ebayResponse.length; v++) {
         if (
           ebayResponse[v].findItemsByKeywordsResponse[0].searchResult[0]
             .item === undefined
         ) {
-          ebayURL.push('N/A');
+          ebayURL.push('N/A')
         } else {
           ebayURL.push(
             ebayResponse[v].findItemsByKeywordsResponse[0].searchResult[0]
               .item[0].viewItemURL[0]
-          );
+          )
         }
-        setebayLink([...ebayURL]);
+        setebayLink([...ebayURL])
       }
-    };
-    setLink();
-  }, [ebayResponse]);
+    }
+    setLink()
+  }, [ebayResponse])
 
   useEffect(() => {
     const handleApiChange = () => {
@@ -75,42 +75,42 @@ function TableContent() {
           [...apiResponse][0]['combinedList1'].concat(
             [...apiResponse][1]['combinedList2']
           )
-        );
-        setIsLoading(false);
+        )
+        setIsLoading(false)
       } else {
-        console.log('loading');
-        setapiList(apiResponse.flat());
+        console.log('loading')
+        setapiList(apiResponse.flat())
       }
-    };
+    }
 
-    handleApiChange();
-  }, [apiResponse]);
+    handleApiChange()
+  }, [apiResponse])
 
   useEffect(() => {
     const tableMath = () => {
-      const priceArr = [];
+      const priceArr = []
       if (apiList.length < 175) {
-        return null;
+        return null
       } else {
         for (let j = 0; j < ebayPrice.length; j++) {
           if (ebayPrice[j] === 'N/A') {
-            priceArr.push('N/A');
+            priceArr.push('N/A')
           } else if (apiList[j]['price'] === undefined) {
-            priceArr.push('error');
+            priceArr.push('error')
           } else {
             priceArr.push(
               Math.round(
                 ebayPrice[j] -
                   parseFloat(apiList[j]['price'].replace(/[$ ,]/g, ''))
               )
-            );
+            )
           }
         }
       }
-      setpricediffList([...priceArr]);
-    };
-    tableMath();
-  }, [apiList, ebayPrice]);
+      setpricediffList([...priceArr])
+    }
+    tableMath()
+  }, [apiList, ebayPrice])
 
   return (
     <tbody>
@@ -147,10 +147,10 @@ function TableContent() {
               ${pricediffList[idx]}
             </td>
           </tr>
-        );
+        )
       })}
     </tbody>
-  );
+  )
 }
 
-export default TableContent;
+export default TableContent

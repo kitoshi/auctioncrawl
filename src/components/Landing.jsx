@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 function LandingPage() {
   return (
@@ -81,6 +81,6 @@ function LandingPage() {
         </p>
       </div>
     </div>
-  );
+  )
 }
-export default LandingPage;
+export default LandingPage

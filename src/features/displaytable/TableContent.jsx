@@ -1,9 +1,9 @@
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 
 function TableContent(props) {
   TableContent.propTypes = {
     list: PropTypes.array,
-  };
+  }
   return props.list.map((item, idx) => {
     return (
       <tr key={idx}>
@@ -16,7 +16,7 @@ function TableContent(props) {
         </td>
         <td>{item.priceDifference}</td>
       </tr>
-    );
-  });
+    )
+  })
 }
-export default TableContent;
+export default TableContent
