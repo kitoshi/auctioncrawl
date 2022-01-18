@@ -1,14 +1,17 @@
 import PropTypes from 'prop-types';
-
+import TableContent from './TableContent';
+import TableHeader from './TableHeader';
 function Table(props) {
   Table.propTypes = {
     headers: PropTypes.array,
+    list: PropTypes.array,
   };
-  const tableHeaders = props.headers.map((text) => <th key={text}>{text}</th>);
+
   return (
     <table>
       <tbody>
-        <tr>{tableHeaders}</tr>
+        <TableHeader headers={props.headers} />
+        <TableContent list={props.list} />
       </tbody>
     </table>
   );
