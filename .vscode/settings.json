@@ -1,6 +1,0 @@
-{
-    "javascript.format.semicolons": "remove",
-    "javascript.inlayHints.functionLikeReturnTypes.enabled": true,
-    "javascript.inlayHints.enumMemberValues.enabled": true,
-    "javascript.inlayHints.parameterTypes.enabled": true
-}

@@ -141,7 +141,7 @@ function TableContent() {
                 color:
                   pricediffList[idx] < 0 || pricediffList[idx] === 'N/A'
                     ? 'red'
-                    : 'green',
+                    : 'green'
               }}
             >
               ${pricediffList[idx]}

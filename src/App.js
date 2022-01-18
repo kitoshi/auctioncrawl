@@ -1,9 +1,9 @@
-import React from 'react';
-import Content from './components/Content.jsx';
-import Landing from './components/Landing.jsx';
-import Table001 from './features/displaytable/Table001.jsx';
-import './App.css';
-import { BrowserRouter, Route, Link, Routes } from 'react-router-dom';
+import React from 'react'
+import Content from './components/Content.jsx'
+import Landing from './components/Landing.jsx'
+import Table001 from './features/displaytable/Table001.jsx'
+import './App.css'
+import { BrowserRouter, Route, Link, Routes } from 'react-router-dom'
 //import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 /*const auth = getAuth();
@@ -47,7 +47,7 @@ function App() {
         </Routes>
       </div>
     </BrowserRouter>
-  );
+  )
 }
 
-export default App;
+export default App
